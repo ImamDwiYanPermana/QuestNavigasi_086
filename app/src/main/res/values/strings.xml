@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QuestNavigasi</string>
+    <string name="wanita" />
+    <string name="laki" />
 </resources>
