@@ -1,10 +1,22 @@
 package com.example.questnavigasi.ui.view
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import java.lang.reflect.Modifier
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun FormMahasiswaView(
@@ -20,3 +32,41 @@ fun FormMahasiswaView(
     var selectedGender by rememberSaveable { mutableStateOf("") }
 
     val dataMahasiswa: MutableList<String> = mutableListOf(name, nim, selectedGender, email, alamat, noHP)
+
+    Column (Modifier.fillMaxSize().padding(16.dp)
+        , horizontalAlignment = Alignment.CenterHorizontally){
+
+        Text("Data Formulir",
+            fontSize = 35.sp,
+            fontWeight = FontWeight.Bold)
+
+        Spacer(Modifier.padding(16.dp))
+
+        OutlinedTextField(
+            value = name,
+            onValueChange = {name = it},
+            placeholder = { Text("Masukkan nama")},
+            label = {Text("Nama")},
+            modifier = Modifier.fil().padding(5.dp)
+        )
+
+        OutlinedTextField(
+            value = nim,
+            onValueChange = {nim = it},
+            placeholder = { Text("Masukkan NIM")},
+            label = {Text("NIM")},
+            modifier = Modifier.fillMaxWidth().padding(5.dp)
+        )
+
+        Row {
+            listJK.forEach { item ->
+                Row (verticalAlignment = Alignment.CenterVertically){
+                    RadioButton(selected = selectedGender == item,
+                        onClick = {
+                            selectedGender = item
+                        }
+                    )
+                    Text(item)
+                }
+            }
+        }
